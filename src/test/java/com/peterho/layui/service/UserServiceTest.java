@@ -19,4 +19,10 @@ class UserServiceTest {
         System.out.println(dataVO);
         int i = 0;
     }
+
+    @Test
+    void loginTest(){
+        service.userLogin("admin1","123456");
+        int i = 0;
+    }
 }

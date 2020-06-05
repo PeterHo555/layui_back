@@ -15,4 +15,9 @@ public class UserController {
     public DataVO list(Integer page, Integer limit){
         return userService.findData(page, limit);
     }
+
+    @RequestMapping("/userLogin")
+    public String userLogin(String loginName, String password){
+        return userService.userLogin(loginName, password);
+    }
 }

@@ -3,11 +3,13 @@ package com.peterho.layui.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.peterho.layui.entity.User;
 import com.peterho.layui.mapper.UserMapper;
 import com.peterho.layui.service.UserService;
 import com.peterho.layui.vo.DataVO;
 import com.peterho.layui.vo.UserVO;
+import net.sf.json.JSONObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,5 +64,40 @@ public class UserServiceImpl implements UserService {
 
         dataVO.setData(userVOList);
         return dataVO;
+    }
+
+
+    public String userLogin(String loginName, String password){
+
+        JSONObject data = new JSONObject();
+        try {
+            QueryWrapper wrapper = new QueryWrapper();
+            wrapper.eq("login_name", loginName);
+            User tempUser = userMapper.selectOne(wrapper);
+            if (tempUser == null) {
+                //用户不存在
+                data.put("message",100);
+                return data.toString();
+
+            }else if(!tempUser.getPassword().equals(password)){
+                //密码不正确
+                data.put("message",101);
+                return data.toString();
+
+            }else {
+                //密码正确
+                data.put("message", 200);
+                data.put("userData", tempUser.toString());
+                return data.toString();
+            }
+        }catch (Exception e){
+            //数据异常
+            data.put("message",102);
+            return data.toString();
+        }
+
+
+
+
     }
 }
