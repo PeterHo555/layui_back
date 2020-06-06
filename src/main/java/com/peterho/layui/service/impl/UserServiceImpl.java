@@ -14,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,7 @@ public class UserServiceImpl implements UserService {
             User tempUser = userMapper.selectOne(wrapper);
             if (tempUser == null) {
                 //用户不存在
+                System.out.println("查询用户不存在");
                 data.put("message",100);
                 return data.toString();
 
@@ -87,7 +89,13 @@ public class UserServiceImpl implements UserService {
             }else {
                 //密码正确
                 data.put("message", 200);
-                data.put("userData", tempUser.toString());
+                JSONObject userData = new JSONObject();
+                userData.put("loginName",tempUser.getLoginName());
+                userData.put("username",tempUser.getUsername());
+                userData.put("phone",tempUser.getPhone());
+                userData.put("email",tempUser.getEmail());
+                userData.put("userType",tempUser.getUserType());
+                data.put("userData", userData);
                 return data.toString();
             }
         }catch (Exception e){
