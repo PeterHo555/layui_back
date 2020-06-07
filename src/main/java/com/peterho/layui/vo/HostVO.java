@@ -8,8 +8,10 @@ public class HostVO {
     private Integer id;
     private Integer hostId;
     private Integer districtId;
+    private String districtName;
     private Integer adminId;
-    private Integer hostState;
+    private String adminName;
+    private String hostState;
     private String lastAlarmTime;
 
 }

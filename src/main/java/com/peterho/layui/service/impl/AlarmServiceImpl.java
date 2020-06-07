@@ -4,8 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.peterho.layui.entity.Alarm;
+import com.peterho.layui.entity.District;
+import com.peterho.layui.entity.Host;
 import com.peterho.layui.entity.User;
 import com.peterho.layui.mapper.AlarmMapper;
+import com.peterho.layui.mapper.DistrictMapper;
+import com.peterho.layui.mapper.HostMapper;
+import com.peterho.layui.mapper.UserMapper;
 import com.peterho.layui.service.AlarmService;
 import com.peterho.layui.vo.AlarmVO;
 import com.peterho.layui.vo.DataVO;
@@ -21,6 +26,15 @@ import java.util.List;
 public class AlarmServiceImpl implements AlarmService {
     @Autowired
     private AlarmMapper alarmMapper;
+
+    @Autowired
+    private DistrictMapper districtMapper;
+
+    @Autowired
+    private HostMapper hostMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
 
     @Override
@@ -41,9 +55,12 @@ public class AlarmServiceImpl implements AlarmService {
             AlarmVO alarmVO = new AlarmVO();
             BeanUtils.copyProperties(alarm, alarmVO);
 
-            QueryWrapper wrapper = new QueryWrapper();
-            wrapper.eq("id",alarm.getId());
-            Alarm tempAlarm = alarmMapper.selectOne(wrapper);
+            QueryWrapper alarmWrapper = new QueryWrapper();
+            alarmWrapper.eq("id",alarm.getId());
+            Alarm tempAlarm = alarmMapper.selectOne(alarmWrapper);
+
+
+
 
             if (tempAlarm!=null){
                 alarmVO.setId(tempAlarm.getId());
@@ -52,6 +69,41 @@ public class AlarmServiceImpl implements AlarmService {
                 alarmVO.setDistrictId(tempAlarm.getDistrictId());
                 alarmVO.setHostId(tempAlarm.getHostId());
                 alarmVO.setTemperature(tempAlarm.getTemperature());
+                //用来查找地区名
+                if (alarm.getDistrictId()!=null){
+                    QueryWrapper districtWrapper = new QueryWrapper();
+                    districtWrapper.eq("district_id",alarm.getDistrictId());
+                    District tempDistrict = districtMapper.selectOne(districtWrapper);
+                    if (tempDistrict!=null){
+                        alarmVO.setDistrictName(tempDistrict.getDistrictName());
+                    }else{
+                        alarmVO.setDistrictName("暂无");
+                    }
+                }else {
+                    alarmVO.setDistrictName("暂无");
+                }
+
+                //用来查找主机所属管理员id，并用该id查出管理员用户名
+                if (alarm.getHostId()!=null){
+                    QueryWrapper hostWrapper = new QueryWrapper();
+                    hostWrapper.eq("host_id",alarm.getHostId());
+                    Host tempHost = hostMapper.selectOne(hostWrapper);
+
+                    User tempUser = new User();
+                    if (tempHost!=null){
+                        QueryWrapper userWrapper = new QueryWrapper();
+                        userWrapper.eq("id",tempHost.getAdminId());
+                        tempUser = userMapper.selectOne(userWrapper);
+                    }
+                    if (tempUser!=null){
+                        alarmVO.setAdminName(tempUser.getUsername());
+                    }else {
+                        alarmVO.setAdminName("暂无");
+                    }
+                }else {
+                    alarmVO.setAdminName("暂无");
+                }
+
             }
             alarmVOList.add(alarmVO);
         }
