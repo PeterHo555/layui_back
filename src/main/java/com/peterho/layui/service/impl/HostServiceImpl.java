@@ -101,4 +101,19 @@ public class HostServiceImpl implements HostService {
         dataVO.setData(hostVOList);
         return dataVO;
     }
+
+
+
+    @Override
+    public String addHost(Host host){
+        try {
+            hostMapper.insert(host);
+            return "200";
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return "100";
+        }
+
+
+    }
 }

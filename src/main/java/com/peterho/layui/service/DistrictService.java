@@ -5,4 +5,6 @@ import com.peterho.layui.vo.DistrictVO;
 
 public interface DistrictService {
     public DataVO<DistrictVO> findData(Integer page, Integer limit);
+
+    public String districts();
 }

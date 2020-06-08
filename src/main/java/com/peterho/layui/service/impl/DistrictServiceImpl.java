@@ -10,11 +10,13 @@ import com.peterho.layui.service.DistrictService;
 import com.peterho.layui.vo.AlarmVO;
 import com.peterho.layui.vo.DataVO;
 import com.peterho.layui.vo.DistrictVO;
+import net.sf.json.JSONObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -56,6 +58,19 @@ public class DistrictServiceImpl implements DistrictService {
 
         dataVO.setData(districtVOList);
         return dataVO;
+    }
+
+    @Override
+    public String districts(){
+        List<District> districtList = districtMapper.selectList(null);
+        JSONObject data = new JSONObject();
+        List<String> dataList = new LinkedList<>();
+        for (District district : districtList) {
+            data.put("districtId",district.getDistrictId());
+            data.put("districtName",district.getDistrictName());
+            dataList.add(data.toString());
+        }
+        return dataList.toString();
     }
 
 

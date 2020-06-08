@@ -16,4 +16,9 @@ public class DistrictController {
         return districtService.findData(page, limit);
     }
 
+    @RequestMapping("/districts")
+    public String districts(){
+        return districtService.districts();
+    }
+
 }

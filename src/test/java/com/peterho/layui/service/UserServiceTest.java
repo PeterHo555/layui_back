@@ -25,4 +25,10 @@ class UserServiceTest {
         service.userLogin("admin1","123456");
         int i = 0;
     }
+
+    @Test
+    void updateTest(){
+        service.userUpdate("admin1","PH7","321@qq.com","54321","系统管理员");
+        int i = 0;
+    }
 }

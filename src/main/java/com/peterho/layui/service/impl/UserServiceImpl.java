@@ -1,9 +1,11 @@
 package com.peterho.layui.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.peterho.layui.entity.District;
 import com.peterho.layui.entity.User;
 import com.peterho.layui.mapper.UserMapper;
 import com.peterho.layui.service.UserService;
@@ -16,7 +18,9 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -69,7 +73,6 @@ public class UserServiceImpl implements UserService {
 
 
     public String userLogin(String loginName, String password){
-
         JSONObject data = new JSONObject();
         try {
             QueryWrapper wrapper = new QueryWrapper();
@@ -103,9 +106,46 @@ public class UserServiceImpl implements UserService {
             data.put("message",102);
             return data.toString();
         }
-
-
-
-
     }
+
+    public String userUpdate(String loginName, String userName, String email, String phone, String userType){
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("login_name",loginName);
+        User forUserId = userMapper.selectOne(wrapper);
+        System.out.println("查找userid："+forUserId);
+        if (forUserId!=null){
+            UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+            userUpdateWrapper.eq("id",forUserId.getId());
+            User tempUser = new User();
+            tempUser.setLoginName(loginName);
+            tempUser.setEmail(email);
+            tempUser.setPhone(phone);
+            tempUser.setUsername(userName);
+            if (userType.equals("系统管理员")){
+                tempUser.setUserType(1);
+            }else {
+                tempUser.setUserType(2);
+            }
+            System.out.println(tempUser);
+            int flag = userMapper.update(tempUser,userUpdateWrapper);
+            System.out.println("状态："+flag);
+            return "200";
+        }else {
+            return "100";
+        }
+    }
+
+    public String users(){
+        List<User> userList = userMapper.selectList(null);
+        JSONObject data = new JSONObject();
+        List<String> dataList = new LinkedList<>();
+        for (User user : userList) {
+            data.put("userId",user.getId());
+            data.put("userName",user.getUsername());
+            dataList.add(data.toString());
+        }
+        return dataList.toString();
+    }
+
+
 }
