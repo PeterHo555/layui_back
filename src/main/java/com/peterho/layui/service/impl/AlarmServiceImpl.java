@@ -59,9 +59,6 @@ public class AlarmServiceImpl implements AlarmService {
             alarmWrapper.eq("id",alarm.getId());
             Alarm tempAlarm = alarmMapper.selectOne(alarmWrapper);
 
-
-
-
             if (tempAlarm!=null){
                 alarmVO.setId(tempAlarm.getId());
                 alarmVO.setAlarmId(tempAlarm.getAlarmId());

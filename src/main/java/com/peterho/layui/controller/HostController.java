@@ -23,10 +23,6 @@ public class HostController {
     @RequestMapping("addhost")
     public String addHost(String hostId,String districtId, String adminId, String hostState){
         Host host = new Host();
-        System.out.println("1111:"+hostId);
-        System.out.println("2222:"+districtId);
-        System.out.println("3333:"+adminId);
-        System.out.println("4444:"+hostState);
 //        host.setId(8);
         if (!hostId.equals(null)){
             host.setId(Integer.valueOf(hostId));

@@ -44,7 +44,7 @@ public class DistrictServiceImpl implements DistrictService {
             BeanUtils.copyProperties(district, districtVO);
 
             QueryWrapper wrapper = new QueryWrapper();
-            wrapper.eq("id",district.getId());
+            wrapper.eq("id", district.getId());
             District tempDistrict = districtMapper.selectOne(wrapper);
 
             if (tempDistrict!=null){
