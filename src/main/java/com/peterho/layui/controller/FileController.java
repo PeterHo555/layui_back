@@ -16,8 +16,13 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
-    @RequestMapping("/temperature")
+    @RequestMapping("/file")
     public DataVO list(Integer page, Integer limit){
         return fileService.findData(page, limit);
+    }
+
+    @RequestMapping("/temperature")
+    public DataVO temperature(){
+        return fileService.getTemperature();
     }
 }
