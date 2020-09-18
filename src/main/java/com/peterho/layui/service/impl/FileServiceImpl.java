@@ -66,6 +66,7 @@ public class FileServiceImpl implements FileService {
             temperatureVO.setTemperature(jo.get("temperature").toString());
             //将VO加入list
             temperatureVOList.add(temperatureVO);
+
         }
 
         dataVO.setData(temperatureVOList);
@@ -76,7 +77,7 @@ public class FileServiceImpl implements FileService {
     public DataVO<TemperatureVO> getTemperature(){
         DataVO dataVO = new DataVO();
         dataVO.setCode(0);
-        dataVO.setMessage("");
+        dataVO.setMessage("200");
         //写文件读写操作
         //将其信息存入数据库
         //并且封装成JSON返回前端
@@ -113,6 +114,21 @@ public class FileServiceImpl implements FileService {
             temperatureVO.setTemperature(jo.get("temperature").toString());
             //将VO加入list
             temperatureVOList.add(temperatureVO);
+
+
+            System.out.println(Double.valueOf(jo.get("temperature").toString()));
+            if (Double.valueOf(jo.get("temperature").toString()) >= 30.0) {
+                System.out.println("温度过高");
+                //做插入操作
+
+                Temperature temperature = new Temperature();
+                temperature.setDate(jo.get("date").toString());
+                temperature.setMsgId((Integer) jo.get("msgid"));
+                temperature.setSensorId((Integer) jo.get("sensorid"));
+                temperature.setTemperature(jo.get("temperature").toString());
+                System.out.println("构造数据成功");
+                temperatureMapper.insert(temperature);
+            }
         }
 
         dataVO.setData(temperatureVOList);
