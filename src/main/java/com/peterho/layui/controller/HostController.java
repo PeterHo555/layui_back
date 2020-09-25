@@ -25,7 +25,6 @@ public class HostController {
         Host host = new Host();
 //        host.setId(8);
         if (!hostId.equals(null)){
-            host.setId(Integer.valueOf(hostId));
             host.setHostId(Integer.valueOf(hostId));
         }else {
             return "100";

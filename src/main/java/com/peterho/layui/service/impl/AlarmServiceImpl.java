@@ -24,6 +24,7 @@ import java.util.List;
 
 @Service
 public class AlarmServiceImpl implements AlarmService {
+
     @Autowired
     private AlarmMapper alarmMapper;
 
@@ -66,10 +67,15 @@ public class AlarmServiceImpl implements AlarmService {
                 alarmVO.setDistrictId(tempAlarm.getDistrictId());
                 alarmVO.setHostId(tempAlarm.getHostId());
                 alarmVO.setTemperature(tempAlarm.getTemperature());
+                if (tempAlarm.getState() == 1){
+                    alarmVO.setState("已排查");
+                }else{
+                    alarmVO.setState("未排查");
+                }
                 //用来查找地区名
                 if (alarm.getDistrictId()!=null){
                     QueryWrapper districtWrapper = new QueryWrapper();
-                    districtWrapper.eq("district_id",alarm.getDistrictId());
+                    districtWrapper.eq("district_id", alarm.getDistrictId());
                     District tempDistrict = districtMapper.selectOne(districtWrapper);
                     if (tempDistrict!=null){
                         alarmVO.setDistrictName(tempDistrict.getDistrictName());
@@ -89,7 +95,7 @@ public class AlarmServiceImpl implements AlarmService {
                     User tempUser = new User();
                     if (tempHost!=null){
                         QueryWrapper userWrapper = new QueryWrapper();
-                        userWrapper.eq("id",tempHost.getAdminId());
+                        userWrapper.eq("id", tempHost.getAdminId());
                         tempUser = userMapper.selectOne(userWrapper);
                     }
                     if (tempUser!=null){

@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 12/09/2020 16:56:40
+ Date: 22/09/2020 11:16:29
 */
 
 SET NAMES utf8mb4;
@@ -127,6 +127,198 @@ INSERT INTO `message` VALUES (3, 1, '青秀区发现电缆故障', '2020-06-04 1
 INSERT INTO `message` VALUES (4, 1, '良庆区发现电缆故障', '2020-06-04 11:11:35');
 INSERT INTO `message` VALUES (5, 2, '武鸣区今日情况良好', '2020-06-04 11:12:04');
 INSERT INTO `message` VALUES (6, 2, '邕宁区发现电缆故障', '2020-06-07 10:35:59');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for temperature
+-- ----------------------------
+DROP TABLE IF EXISTS `temperature`;
+CREATE TABLE `temperature` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime DEFAULT NULL,
+  `msg_id` int(11) DEFAULT NULL,
+  `sensor_id` int(11) DEFAULT NULL,
+  `temperature` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of temperature
+-- ----------------------------
+BEGIN;
+INSERT INTO `temperature` VALUES (1, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (2, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (3, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (4, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (5, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (6, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (7, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (8, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (9, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (10, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (11, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (12, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (13, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (14, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (15, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (16, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (17, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (18, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (19, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (20, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (21, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (22, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (23, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (24, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (25, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (26, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (27, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (28, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (29, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (30, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (31, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (32, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (33, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (34, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (35, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (36, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (37, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (38, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (39, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (40, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (41, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (42, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (43, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (44, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (45, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (46, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (47, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (48, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (49, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (50, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (51, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (52, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (53, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (54, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (55, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (56, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (57, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (58, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (59, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (60, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (61, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (62, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (63, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (64, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (65, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (66, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (67, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (68, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (69, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (70, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (71, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (72, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (73, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (74, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (75, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (76, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (77, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (78, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (79, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (80, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (81, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (82, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (83, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (84, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (85, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (86, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (87, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (88, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (89, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (90, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (91, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (92, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (93, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (94, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (95, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (96, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (97, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (98, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (99, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (100, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (101, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (102, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (103, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (104, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (105, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (106, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (107, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (108, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (109, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (110, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (111, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (112, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (113, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (114, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (115, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (116, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (117, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (118, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (119, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (120, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (121, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (122, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (123, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (124, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (125, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (126, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (127, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (128, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (129, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (130, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (131, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (132, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (133, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (134, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (135, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (136, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (137, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (138, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (139, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (140, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (141, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (142, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (143, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (144, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (145, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (146, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (147, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (148, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (149, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (150, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (151, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (152, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (153, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (154, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (155, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (156, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (157, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (158, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (159, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (160, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (161, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (162, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (163, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (164, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (165, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (166, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (167, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (168, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (169, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (170, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (171, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (172, '2020-08-11 18:55:00', 36, 3, '32.80');
+INSERT INTO `temperature` VALUES (173, '2020-08-11 18:55:00', 36, 3, '32.80');
 COMMIT;
 
 -- ----------------------------

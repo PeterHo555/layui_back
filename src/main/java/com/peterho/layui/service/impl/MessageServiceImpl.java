@@ -3,9 +3,10 @@ package com.peterho.layui.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.peterho.layui.entity.Alarm;
-import com.peterho.layui.entity.Message;
+import com.peterho.layui.entity.*;
+import com.peterho.layui.mapper.DistrictMapper;
 import com.peterho.layui.mapper.MessageMapper;
+import com.peterho.layui.mapper.UserMapper;
 import com.peterho.layui.service.MessageService;
 import com.peterho.layui.vo.AlarmVO;
 import com.peterho.layui.vo.DataVO;
@@ -14,7 +15,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,6 +25,12 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private MessageMapper messageMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private DistrictMapper districtMapper;
 
 
     @Override
@@ -42,15 +51,27 @@ public class MessageServiceImpl implements MessageService {
             MessageVO messageVO = new MessageVO();
             BeanUtils.copyProperties(message, messageVO);
 
-            QueryWrapper wrapper = new QueryWrapper();
-            wrapper.eq("id",message.getId());
-            Message tempMessage = messageMapper.selectOne(wrapper);
+            messageVO.setId(message.getId());
+            messageVO.setUserId(message.getUserId());
+            messageVO.setMessage(message.getMessage());
+            messageVO.setMsgTime(message.getMsgTime());
 
-            if (tempMessage!=null){
-                messageVO.setId(tempMessage.getId());
-                messageVO.setUserId(tempMessage.getUserId());
-                messageVO.setMessage(tempMessage.getMessage());
-                messageVO.setMsgTime(tempMessage.getMsgTime());
+            QueryWrapper userWrapper = new QueryWrapper();
+            userWrapper.eq("id", message.getUserId());
+            User tempUser = userMapper.selectOne(userWrapper);
+            if (tempUser != null){
+                messageVO.setUserName(tempUser.getUsername());
+            }else{
+                messageVO.setUserName("暂无");
+            }
+
+            QueryWrapper districtWrapper = new QueryWrapper();
+            districtWrapper.eq("district_id", message.getDistrictId());
+            District tempDistrict = districtMapper.selectOne(districtWrapper);
+            if (tempDistrict != null){
+                messageVO.setDistrictName(tempDistrict.getDistrictName());
+            }else{
+                messageVO.setDistrictName("暂无");
             }
             messageVOList.add(messageVO);
         }
@@ -58,4 +79,19 @@ public class MessageServiceImpl implements MessageService {
         dataVO.setData(messageVOList);
         return dataVO;
     }
+
+
+
+
+    public String addMessage(Message message){
+        String msg = "200";
+        SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
+        sdf.applyPattern("yyyy-MM-dd HH:mm:ss");// a为am/pm的标记
+        Date date = new Date();// 获取当前时间
+        message.setMsgTime(sdf.format(date));
+        messageMapper.insert(message);
+        return msg;
+    }
+
+
 }

@@ -89,11 +89,12 @@ public class UserServiceImpl implements UserService {
                 //密码正确
                 data.put("message", 200);
                 JSONObject userData = new JSONObject();
-                userData.put("loginName",tempUser.getLoginName());
-                userData.put("username",tempUser.getUsername());
-                userData.put("phone",tempUser.getPhone());
-                userData.put("email",tempUser.getEmail());
-                userData.put("userType",tempUser.getUserType());
+                userData.put("userId", tempUser.getId());
+                userData.put("loginName", tempUser.getLoginName());
+                userData.put("username", tempUser.getUsername());
+                userData.put("phone", tempUser.getPhone());
+                userData.put("email", tempUser.getEmail());
+                userData.put("userType", tempUser.getUserType());
                 data.put("userData", userData);
                 return data.toString();
             }

@@ -13,5 +13,6 @@ public class AlarmVO {
     private String districtName;
     private String temperature;
     private String adminName;
+    private String state;
 
 }
