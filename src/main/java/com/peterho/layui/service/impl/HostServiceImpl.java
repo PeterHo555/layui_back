@@ -51,12 +51,12 @@ public class HostServiceImpl implements HostService {
             BeanUtils.copyProperties(host, hostVO);
 
             QueryWrapper hostwrapper = new QueryWrapper();
-            hostwrapper.eq("id",host.getId());
+            hostwrapper.eq("id",host.getHostId());
             Host tempHost = hostMapper.selectOne(hostwrapper);
 
             if (tempHost!=null){
                 //相关字段
-                hostVO.setId(tempHost.getId());
+//                hostVO.setHostId(tempHost.getHostId());
                 hostVO.setHostId(tempHost.getHostId());
                 hostVO.setDistrictId(tempHost.getDistrictId());
                 hostVO.setAdminId(tempHost.getAdminId());
@@ -69,7 +69,7 @@ public class HostServiceImpl implements HostService {
                 //用来查找地区名
                 if(tempHost.getDistrictId()!=null){
                     QueryWrapper districtWrapper = new QueryWrapper();
-                    districtWrapper.eq("district_id",tempHost.getDistrictId());
+                    districtWrapper.eq("district_id", tempHost.getDistrictId());
                     District tempDistrict = districtMapper.selectOne(districtWrapper);
                     if (tempDistrict!=null){
                         hostVO.setDistrictName(tempDistrict.getDistrictName());

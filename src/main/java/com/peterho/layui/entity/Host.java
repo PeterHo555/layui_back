@@ -9,7 +9,6 @@ import lombok.Data;
 public class Host {
 
     @TableId(type = IdType.AUTO)
-    private Integer id;
     private Integer hostId;
     private Integer districtId;
     private Integer adminId;

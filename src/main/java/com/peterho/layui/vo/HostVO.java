@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class HostVO {
 
-    private Integer id;
     private Integer hostId;
     private Integer districtId;
     private String districtName;

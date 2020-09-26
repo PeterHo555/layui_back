@@ -23,12 +23,11 @@ public class HostController {
     @RequestMapping("addhost")
     public String addHost(String hostId,String districtId, String adminId, String hostState){
         Host host = new Host();
-//        host.setId(8);
-        if (!hostId.equals(null)){
-            host.setHostId(Integer.valueOf(hostId));
-        }else {
-            return "100";
-        }
+//        if (!hostId.equals(null)){
+//            host.setHostId(Integer.valueOf(hostId));
+//        }else {
+//            return "100";
+//        }
         if (!districtId.equals(null)){
             host.setDistrictId(Integer.valueOf(districtId));
         }else {
@@ -49,13 +48,8 @@ public class HostController {
             return "100";
         }
 
-
-
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
         host.setLastAlarmTime(df.format(new Date()));
-
-        System.out.println(host);
 
         return hostService.addHost(host);
     }

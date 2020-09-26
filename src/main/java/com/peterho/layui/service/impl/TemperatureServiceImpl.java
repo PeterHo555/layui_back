@@ -113,6 +113,8 @@ public class TemperatureServiceImpl implements TemperatureService {
                 alarm.setHostId((Integer) jo.get("sensorid"));
                 alarm.setDistrictId((Integer) jo.get("sensorid"));
                 alarm.setTemperature(jo.get("temperature").toString());
+                // 处理状态默认为00
+                alarm.setState(0);
                 System.out.println("构造数据成功");
                 alarmMapper.insert(alarm);
             }
