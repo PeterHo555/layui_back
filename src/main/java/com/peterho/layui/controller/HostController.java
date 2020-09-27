@@ -21,13 +21,8 @@ public class HostController {
     }
 
     @RequestMapping("addhost")
-    public String addHost(String hostId,String districtId, String adminId, String hostState){
+    public String addHost(String districtId, String adminId, Integer hostState){
         Host host = new Host();
-//        if (!hostId.equals(null)){
-//            host.setHostId(Integer.valueOf(hostId));
-//        }else {
-//            return "100";
-//        }
         if (!districtId.equals(null)){
             host.setDistrictId(Integer.valueOf(districtId));
         }else {
@@ -38,20 +33,24 @@ public class HostController {
         }else {
             return "100";
         }
-        if (!hostState.equals(null)){
-            if (hostState.equals("on")){
-                host.setHostState(1);
-            }else {
-                host.setHostState(0);
-            }
+        if (hostState == 1){
+            host.setHostState(1);
         }else {
-            return "100";
+            host.setHostState(0);
         }
+
+        System.out.println(host.getHostState());
+
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
         host.setLastAlarmTime(df.format(new Date()));
-
         return hostService.addHost(host);
+    }
+
+    @RequestMapping("updatehoststate")
+    public String updateHostState(Integer hostId, Integer hostState){
+        System.out.println(hostId);
+        return hostService.updateHostState(hostId, hostState);
     }
 
 }

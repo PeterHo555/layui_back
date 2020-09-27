@@ -1,6 +1,7 @@
 package com.peterho.layui.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.peterho.layui.entity.District;
@@ -51,7 +52,7 @@ public class HostServiceImpl implements HostService {
             BeanUtils.copyProperties(host, hostVO);
 
             QueryWrapper hostwrapper = new QueryWrapper();
-            hostwrapper.eq("id",host.getHostId());
+            hostwrapper.eq("host_id",host.getHostId());
             Host tempHost = hostMapper.selectOne(hostwrapper);
 
             if (tempHost!=null){
@@ -113,7 +114,24 @@ public class HostServiceImpl implements HostService {
             System.out.println(e.getMessage());
             return "100";
         }
+    }
 
-
+    @Override
+    public String updateHostState(Integer hostId, Integer hostState){
+        System.out.println("last:"+hostId);
+        try {
+            Host host = new Host();
+            if (hostState == 0){
+                host.setHostState(1);
+            }else {
+                host.setHostState(0);
+            }
+            UpdateWrapper<Host> hostUpdateWrapper = new UpdateWrapper<>();
+            hostUpdateWrapper.eq("host_id", hostId);
+            hostMapper.update(host, hostUpdateWrapper);
+            return "200";
+        }catch (Exception e){
+            return "100";
+        }
     }
 }

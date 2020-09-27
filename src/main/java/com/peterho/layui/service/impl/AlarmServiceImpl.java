@@ -1,6 +1,7 @@
 package com.peterho.layui.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.peterho.layui.entity.Alarm;
@@ -194,6 +195,21 @@ public class AlarmServiceImpl implements AlarmService {
         dataVO.setData(alarmVOList);
 
         return dataVO;
+    }
+
+    @Override
+    public String updateState(Integer id){
+        System.out.println(id);
+
+        Alarm alarm = new Alarm();
+        alarm.setId(id);
+        alarm.setState(1);
+        UpdateWrapper<Alarm> alarmUpdateWrapper = new UpdateWrapper<>();
+        alarmUpdateWrapper.eq("id",id);
+
+        alarmMapper.update(alarm, alarmUpdateWrapper);
+
+        return "200";
     }
 
 }

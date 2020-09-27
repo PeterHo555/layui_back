@@ -8,4 +8,6 @@ public interface AlarmService {
     public DataVO<AlarmVO> findData(Integer page, Integer limit);
 
     public DataVO<AlarmVO> getSearch(Alarm alarm);
+
+    public String updateState(Integer id);
 }

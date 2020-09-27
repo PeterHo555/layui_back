@@ -27,6 +27,12 @@ public class AlarmController {
         return alarmService.getSearch(alarm);
     }
 
+    @RequestMapping("/updatestate")
+    public String updateState(Integer id){
+        System.out.println(id);
+        return alarmService.updateState(id);
+    }
+
 
 
 }

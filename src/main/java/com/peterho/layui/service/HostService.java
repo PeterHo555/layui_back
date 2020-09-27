@@ -8,4 +8,6 @@ public interface HostService {
     public DataVO<HostVO> findData(Integer page, Integer limit);
 
     public String addHost(Host host);
+
+    public String updateHostState(Integer hostId, Integer hostState);
 }

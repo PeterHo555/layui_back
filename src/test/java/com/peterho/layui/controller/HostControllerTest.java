@@ -14,10 +14,7 @@ class HostControllerTest {
 
     @Test
     void test(){
-        String falg = hostController.addHost("8","2","2","on");
 
-        System.out.println(falg);
-        int i = 0;
     }
 
 }
