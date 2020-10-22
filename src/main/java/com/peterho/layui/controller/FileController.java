@@ -14,15 +14,20 @@ public class FileController {
     private DistrictService districtService;
 
     @Autowired
-    private TemperatureService fileService;
+    private TemperatureService temperatureService;
 
     @RequestMapping("/file")
     public DataVO list(Integer page, Integer limit){
-        return fileService.findData(page, limit);
+        return temperatureService.findData(page, limit);
     }
 
     @RequestMapping("/temperature")
     public DataVO temperature(){
-        return fileService.getTemperature();
+        return temperatureService.getTemperature();
+    }
+    @RequestMapping("/writedata")
+    public String writeData(String date, Integer msgId, Integer sensorId, String temperature){
+        temperatureService.writeData(date, msgId, sensorId, temperature);
+        return "200";
     }
 }

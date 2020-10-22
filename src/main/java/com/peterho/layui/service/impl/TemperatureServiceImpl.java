@@ -15,7 +15,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +31,8 @@ public class TemperatureServiceImpl implements TemperatureService {
     @Autowired
     private AlarmMapper alarmMapper;
 
-    @Autowired
-    private DistrictMapper districtMapper;
 
-    @Autowired
-    private HostMapper hostMapper;
-
-    @Autowired
-    private UserMapper userMapper;
-
+    @Override
     public DataVO<TemperatureVO> findData(Integer page, Integer limit){
         DataVO dataVO = new DataVO();
         dataVO.setCode(0);
@@ -66,7 +62,7 @@ public class TemperatureServiceImpl implements TemperatureService {
         return dataVO;
     }
 
-
+    @Override
     public DataVO<TemperatureVO> getTemperature(){
         DataVO dataVO = new DataVO();
         dataVO.setCode(0);
@@ -122,6 +118,34 @@ public class TemperatureServiceImpl implements TemperatureService {
 
         dataVO.setData(temperatureVOList);
         return dataVO;
+    }
+
+    @Override
+    public String writeData(String date, Integer msgId, Integer sensorId, String temperature) {
+        String absFilePath = "//Users/macbook/IdeaProjects/layui/data.txt";
+        String data = " This content will append to the end of the file";
+        // 构造字符串
+
+        // 写入温度日志文件
+        try{
+            File file1 = new File(absFilePath);
+            //if file doesnt exists, then create it
+            if(!file1.exists()){
+                file1.createNewFile();
+            }
+            //绝对路径
+            FileWriter fileWritter1 = new FileWriter(file1,true);
+            BufferedWriter bufferWritter1 = new BufferedWriter(fileWritter1);
+            bufferWritter1.write(data);
+            bufferWritter1.newLine();
+            bufferWritter1.close();
+            System.out.println("Done1");
+            return "200";
+
+        }catch(IOException e){
+            e.printStackTrace();
+            return "100";
+        }
     }
 
 }
