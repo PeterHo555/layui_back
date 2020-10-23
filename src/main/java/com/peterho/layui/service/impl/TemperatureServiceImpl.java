@@ -29,6 +29,9 @@ public class TemperatureServiceImpl implements TemperatureService {
     private TemperatureMapper temperatureMapper;
 
     @Autowired
+    private  AllTemperatureMapper allTemperatureMapper;
+
+    @Autowired
     private AlarmMapper alarmMapper;
 
 
@@ -63,6 +66,48 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
+    public DataVO<TemperatureVO> getNewTemperature(){
+        System.out.println("in");
+        DataVO dataVO = new DataVO();
+        dataVO.setCode(0);
+        dataVO.setMessage("300");
+        dataVO.setCount((long) 5);
+//        // 读取文件部分
+//        List<TemperatureVO> temperatureVOList = new ArrayList<>();
+//        String filePath = "data.txt";
+//        FileOperation fileOperation = new FileOperation();
+//        File file = new File(filePath);
+//        List<String> lastNLineString = fileOperation.readLastNLine(file, 5);
+
+        //SELECT * FROM user（表名） order by user_id（字段） DESC limit 5;
+        QueryWrapper tempWrapper = new QueryWrapper();
+        tempWrapper.orderByDesc("id");
+        tempWrapper.last("limit 5");
+
+
+        // 从数据库读取
+//        List<AllTemperature> allTemperatureList = allTemperatureMapper.selectList(tempWrapper);
+        List<Temperature> allTemperatureList = temperatureMapper.selectList(tempWrapper);
+
+
+        System.out.println(allTemperatureList.toString());
+
+        List<TemperatureVO> temperatureVOList = new ArrayList<>();
+        for (Temperature at : allTemperatureList) {
+            TemperatureVO temperatureVO = new TemperatureVO();
+            temperatureVO.setId(at.getId());
+            temperatureVO.setTemperature(at.getTemperature());
+            temperatureVO.setMsgId(at.getMsgId());
+            temperatureVO.setDate(at.getDate());
+            temperatureVO.setSensorId(at.getSensorId());
+            temperatureVOList.add(temperatureVO);
+        }
+        dataVO.setData(temperatureVOList);
+        return dataVO;
+    }
+
+
+    @Override
     public DataVO<TemperatureVO> getTemperature(){
         DataVO dataVO = new DataVO();
         dataVO.setCode(0);
@@ -79,8 +124,8 @@ public class TemperatureServiceImpl implements TemperatureService {
             JSONObject jo = new JSONObject();
             jo = JSONObject.fromObject(temp);
             temperatureVO.setDate(jo.get("date").toString());
-            temperatureVO.setMsgid((Integer) jo.get("msgid"));
-            temperatureVO.setSensorid((Integer) jo.get("sensorid"));
+            temperatureVO.setMsgId((Integer) jo.get("msgid"));
+            temperatureVO.setSensorId((Integer) jo.get("sensorid"));
             temperatureVO.setTemperature(jo.get("temperature").toString());
 
             //将VO加入list

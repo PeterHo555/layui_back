@@ -6,7 +6,7 @@ import lombok.Data;
 public class TemperatureVO {
     private Integer id;
     private String Date;
-    private Integer msgid;
-    private Integer sensorid;
+    private Integer msgId;
+    private Integer sensorId;
     private String temperature;
 }

@@ -25,9 +25,18 @@ public class FileController {
     public DataVO temperature(){
         return temperatureService.getTemperature();
     }
+
     @RequestMapping("/writedata")
     public String writeData(String date, Integer msgId, Integer sensorId, String temperature){
         temperatureService.writeData(date, msgId, sensorId, temperature);
         return "200";
     }
+
+    @RequestMapping("/getnewtemperature")
+    public DataVO getNewTemperature(){
+        System.out.println("555555");
+        return temperatureService.getNewTemperature();
+    }
+
+
 }
