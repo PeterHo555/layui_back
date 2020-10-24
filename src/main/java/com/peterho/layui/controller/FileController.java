@@ -27,16 +27,15 @@ public class FileController {
     }
 
     @RequestMapping("/writedata")
-    public String writeData(String date, Integer msgId, Integer sensorId, String temperature){
-        temperatureService.writeData(date, msgId, sensorId, temperature);
-        return "200";
+    public String writeData(String data){
+        return temperatureService.writeData(data);
     }
 
-    @RequestMapping("/getnewtemperature")
-    public DataVO getNewTemperature(){
-        System.out.println("555555");
-        return temperatureService.getNewTemperature();
-    }
+//    @RequestMapping("/getnewtemperature")
+//    public DataVO getNewTemperature(){
+//        System.out.println("555555");
+//        return temperatureService.getNewTemperature();
+//    }
 
 
 }

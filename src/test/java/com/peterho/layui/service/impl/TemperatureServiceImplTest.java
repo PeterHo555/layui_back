@@ -15,6 +15,5 @@ class TemperatureServiceImplTest {
 
     @Test
     void getNewTemperature() {
-        DataVO<TemperatureVO> temp = temperatureService.getNewTemperature();
     }
 }

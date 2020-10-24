@@ -25,11 +25,11 @@ import java.util.List;
 @Service
 public class TemperatureServiceImpl implements TemperatureService {
 
-    @Autowired
-    private TemperatureMapper temperatureMapper;
+    // CentOS上的日志绝对路径
+    private final String absFilePath = "//project/log/data.txt";
 
     @Autowired
-    private  AllTemperatureMapper allTemperatureMapper;
+    private TemperatureMapper temperatureMapper;
 
     @Autowired
     private AlarmMapper alarmMapper;
@@ -65,46 +65,47 @@ public class TemperatureServiceImpl implements TemperatureService {
         return dataVO;
     }
 
-    @Override
-    public DataVO<TemperatureVO> getNewTemperature(){
-        System.out.println("in");
-        DataVO dataVO = new DataVO();
-        dataVO.setCode(0);
-        dataVO.setMessage("300");
-        dataVO.setCount((long) 5);
-//        // 读取文件部分
+
+//    @Override
+//    public DataVO<TemperatureVO> getNewTemperature(){
+//        System.out.println("in");
+//        DataVO dataVO = new DataVO();
+//        dataVO.setCode(0);
+//        dataVO.setMessage("300");
+//        dataVO.setCount((long) 5);
+////        // 读取文件部分
+////        List<TemperatureVO> temperatureVOList = new ArrayList<>();
+////        String filePath = "data.txt";
+////        FileOperation fileOperation = new FileOperation();
+////        File file = new File(filePath);
+////        List<String> lastNLineString = fileOperation.readLastNLine(file, 5);
+//
+//        //SELECT * FROM user（表名） order by user_id（字段） DESC limit 5;
+//        QueryWrapper tempWrapper = new QueryWrapper();
+//        tempWrapper.orderByDesc("id");
+//        tempWrapper.last("limit 5");
+//
+//
+//        // 从数据库读取
+////        List<AllTemperature> allTemperatureList = allTemperatureMapper.selectList(tempWrapper);
+//        List<Temperature> allTemperatureList = temperatureMapper.selectList(tempWrapper);
+//
+//
+//        System.out.println(allTemperatureList.toString());
+//
 //        List<TemperatureVO> temperatureVOList = new ArrayList<>();
-//        String filePath = "data.txt";
-//        FileOperation fileOperation = new FileOperation();
-//        File file = new File(filePath);
-//        List<String> lastNLineString = fileOperation.readLastNLine(file, 5);
-
-        //SELECT * FROM user（表名） order by user_id（字段） DESC limit 5;
-        QueryWrapper tempWrapper = new QueryWrapper();
-        tempWrapper.orderByDesc("id");
-        tempWrapper.last("limit 5");
-
-
-        // 从数据库读取
-//        List<AllTemperature> allTemperatureList = allTemperatureMapper.selectList(tempWrapper);
-        List<Temperature> allTemperatureList = temperatureMapper.selectList(tempWrapper);
-
-
-        System.out.println(allTemperatureList.toString());
-
-        List<TemperatureVO> temperatureVOList = new ArrayList<>();
-        for (Temperature at : allTemperatureList) {
-            TemperatureVO temperatureVO = new TemperatureVO();
-            temperatureVO.setId(at.getId());
-            temperatureVO.setTemperature(at.getTemperature());
-            temperatureVO.setMsgId(at.getMsgId());
-            temperatureVO.setDate(at.getDate());
-            temperatureVO.setSensorId(at.getSensorId());
-            temperatureVOList.add(temperatureVO);
-        }
-        dataVO.setData(temperatureVOList);
-        return dataVO;
-    }
+//        for (Temperature at : allTemperatureList) {
+//            TemperatureVO temperatureVO = new TemperatureVO();
+//            temperatureVO.setId(at.getId());
+//            temperatureVO.setTemperature(at.getTemperature());
+//            temperatureVO.setMsgId(at.getMsgId());
+//            temperatureVO.setDate(at.getDate());
+//            temperatureVO.setSensorId(at.getSensorId());
+//            temperatureVOList.add(temperatureVO);
+//        }
+//        dataVO.setData(temperatureVOList);
+//        return dataVO;
+//    }
 
 
     @Override
@@ -115,9 +116,9 @@ public class TemperatureServiceImpl implements TemperatureService {
         dataVO.setCount((long) 5);
         // 读取文件部分
         List<TemperatureVO> temperatureVOList = new ArrayList<>();
-        String filePath = "data.txt";
         FileOperation fileOperation = new FileOperation();
-        File file = new File(filePath);
+        // 读取绝对路径中的日志数据
+        File file = new File(absFilePath);
         List<String> lastNLineString = fileOperation.readLastNLine(file, 5);
         for(String temp : lastNLineString){
             TemperatureVO temperatureVO = new TemperatureVO();
@@ -166,25 +167,21 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
-    public String writeData(String date, Integer msgId, Integer sensorId, String temperature) {
-        String absFilePath = "//Users/macbook/IdeaProjects/layui/data.txt";
-        String data = " This content will append to the end of the file";
-        // 构造字符串
-
+    public String writeData(String data) {
         // 写入温度日志文件
         try{
-            File file1 = new File(absFilePath);
+            File file = new File(absFilePath);
             //if file doesnt exists, then create it
-            if(!file1.exists()){
-                file1.createNewFile();
+            if(!file.exists()){
+                file.createNewFile();
             }
             //绝对路径
-            FileWriter fileWritter1 = new FileWriter(file1,true);
+            FileWriter fileWritter1 = new FileWriter(file,true);
             BufferedWriter bufferWritter1 = new BufferedWriter(fileWritter1);
             bufferWritter1.write(data);
             bufferWritter1.newLine();
             bufferWritter1.close();
-            System.out.println("Done1");
+            System.out.println("write data absolute file path Done!");
             return "200";
 
         }catch(IOException e){
