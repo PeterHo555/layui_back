@@ -9,5 +9,6 @@ public class DataVO<T> {
     private Integer code;
     private String message;
     private Long count;
+    private Long done;
     private List<T> data;
 }

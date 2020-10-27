@@ -113,7 +113,23 @@ public class TemperatureServiceImpl implements TemperatureService {
         DataVO dataVO = new DataVO();
         dataVO.setCode(0);
         dataVO.setMessage("200");
-        dataVO.setCount((long) 5);
+
+        QueryWrapper<Alarm> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("state",0);
+
+        int sum = alarmMapper.selectCount(new QueryWrapper<>());
+        int done = alarmMapper.selectCount(queryWrapper);
+
+        // 此处用作记录总异常数
+        dataVO.setCount((long) sum);
+        // 已处理
+        dataVO.setDone((long)done);
+        // 未处理
+        dataVO.setCode(sum - done);
+
+
+
+
         // 读取文件部分
         List<TemperatureVO> temperatureVOList = new ArrayList<>();
         FileOperation fileOperation = new FileOperation();
@@ -132,8 +148,8 @@ public class TemperatureServiceImpl implements TemperatureService {
             //将VO加入list
             temperatureVOList.add(temperatureVO);
 
-            // 30 度以上存入数据库temperature表
-            if (Double.valueOf(jo.get("temperature").toString()) >= 30.0) {
+            // 50 度以上存入数据库temperature表
+            if (Double.valueOf(jo.get("temperature").toString()) >= 50.0) {
                 System.out.println("温度过高：" + Double.valueOf(jo.get("temperature").toString()));
                 //做插入操作
                 Temperature temperature = new Temperature();
@@ -145,8 +161,8 @@ public class TemperatureServiceImpl implements TemperatureService {
                 temperatureMapper.insert(temperature);
             }
 
-            // 30 度以上存入数据库alarm表
-            if (Double.valueOf(jo.get("temperature").toString()) >= 30.0) {
+            // 50 度以上存入数据库alarm表
+            if (Double.valueOf(jo.get("temperature").toString()) >= 50.0) {
                 System.out.println("温度过高：" + Double.valueOf(jo.get("temperature").toString()));
                 //做插入操作
                 Alarm alarm = new Alarm();

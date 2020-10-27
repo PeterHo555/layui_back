@@ -15,8 +15,6 @@ import com.peterho.layui.mapper.UserMapper;
 import com.peterho.layui.service.AlarmService;
 import com.peterho.layui.vo.AlarmVO;
 import com.peterho.layui.vo.DataVO;
-import com.peterho.layui.vo.MessageVO;
-import com.peterho.layui.vo.UserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +45,9 @@ public class AlarmServiceImpl implements AlarmService {
         dataVO.setMessage("");
         //分页操作
         IPage<Alarm> alarmIPage = new Page<>(page,limit);
-        IPage<Alarm> result = alarmMapper.selectPage(alarmIPage,null);
+        QueryWrapper<Alarm> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("id");
+        IPage<Alarm> result = alarmMapper.selectPage(alarmIPage,queryWrapper);
 
         dataVO.setCount(result.getTotal());
 
