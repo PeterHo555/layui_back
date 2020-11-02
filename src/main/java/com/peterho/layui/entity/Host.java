@@ -14,4 +14,6 @@ public class Host {
     private Integer adminId;
     private Integer hostState;
     private String lastAlarmTime;
+    private String longitude;
+    private String latitude;
 }

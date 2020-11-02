@@ -19,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,9 +194,39 @@ public class AlarmServiceImpl implements AlarmService {
         }
         System.out.println(alarmVOList.toString());
         dataVO.setData(alarmVOList);
-
         return dataVO;
     }
+
+
+    @Override
+    public DataVO<AlarmVO> getAlarm(){
+        DataVO dataVO = new DataVO();
+        dataVO.setCode(0);
+        dataVO.setMessage("200");
+        // 只需要封装好未经过处理的警报信息
+        List<Alarm> list = alarmMapper.selectList(null);
+        List<AlarmVO> alarmVOList = new ArrayList<>();
+        for (Alarm alarm : list) {
+            // 此异常被处理过，跳过
+            if (alarm.getState() == 1)
+                continue;
+            AlarmVO alarmVO = new AlarmVO();
+            int hostId = alarm.getHostId();
+            QueryWrapper<Host> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("host_id", hostId);
+            Host temphost = hostMapper.selectOne(queryWrapper);
+            alarmVO.setLongitude(temphost.getLongitude());
+            alarmVO.setLatitude(temphost.getLatitude());
+            alarmVO.setTemperature(alarm.getTemperature());
+            alarmVO.setHostId(hostId);
+            alarmVOList.add(alarmVO);
+        }
+        dataVO.setData(alarmVOList);
+        return dataVO;
+    }
+
+
+
 
     @Override
     public String updateState(Integer id){

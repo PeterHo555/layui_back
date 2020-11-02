@@ -10,4 +10,6 @@ public interface AlarmService {
     public DataVO<AlarmVO> getSearch(Alarm alarm);
 
     public String updateState(Integer id);
+
+    public DataVO<AlarmVO> getAlarm();
 }

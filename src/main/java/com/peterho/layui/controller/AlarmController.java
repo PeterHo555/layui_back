@@ -19,7 +19,6 @@ public class AlarmController {
 
     @RequestMapping("/getsearch")
     public DataVO getSearch(Integer hostId, Integer districtId){
-        System.out.println("in");
         System.out.println(hostId);
         Alarm alarm = new Alarm();
         alarm.setHostId(hostId);
@@ -29,8 +28,12 @@ public class AlarmController {
 
     @RequestMapping("/updatestate")
     public String updateState(Integer id){
-        System.out.println(id);
         return alarmService.updateState(id);
+    }
+
+    @RequestMapping("/getalarm")
+    public DataVO getAlarm(){
+        return alarmService.getAlarm();
     }
 
 

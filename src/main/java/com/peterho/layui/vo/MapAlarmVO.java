@@ -3,8 +3,7 @@ package com.peterho.layui.vo;
 import lombok.Data;
 
 @Data
-public class AlarmVO {
-
+public class MapAlarmVO {
     private Integer id;
     private Integer alarmId;
     private Integer hostId;
@@ -16,5 +15,4 @@ public class AlarmVO {
     private String state;
     private String longitude;
     private String latitude;
-
 }
