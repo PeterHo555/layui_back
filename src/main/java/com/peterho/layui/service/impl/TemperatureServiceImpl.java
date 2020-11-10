@@ -25,8 +25,10 @@ import java.util.List;
 @Service
 public class TemperatureServiceImpl implements TemperatureService {
 
-    // CentOS上的日志绝对路径
-    private final String absFilePath = "//project/log/data.txt";
+    // CentOS上的设备温度日志绝对路径
+    private final String absTemFilePath = "//project/log/data.txt";
+
+
 
     @Autowired
     private TemperatureMapper temperatureMapper;
@@ -126,15 +128,11 @@ public class TemperatureServiceImpl implements TemperatureService {
         dataVO.setDone((long)done);
         // 未处理
         dataVO.setCode(sum - done);
-
-
-
-
         // 读取文件部分
         List<TemperatureVO> temperatureVOList = new ArrayList<>();
         FileOperation fileOperation = new FileOperation();
         // 读取绝对路径中的日志数据
-        File file = new File(absFilePath);
+        File file = new File(absTemFilePath);
         List<String> lastNLineString = fileOperation.readLastNLine(file, 5);
         for(String temp : lastNLineString){
             TemperatureVO temperatureVO = new TemperatureVO();
@@ -182,11 +180,17 @@ public class TemperatureServiceImpl implements TemperatureService {
         return dataVO;
     }
 
+
+
+
+
+
+
     @Override
     public String writeData(String data) {
         // 写入温度日志文件
         try{
-            File file = new File(absFilePath);
+            File file = new File(absTemFilePath);
             //if file doesnt exists, then create it
             if(!file.exists()){
                 file.createNewFile();
@@ -199,11 +203,13 @@ public class TemperatureServiceImpl implements TemperatureService {
             bufferWritter1.close();
             System.out.println("write data absolute file path Done!");
             return "200";
-
         }catch(IOException e){
             e.printStackTrace();
             return "100";
         }
     }
+
+
+
 
 }

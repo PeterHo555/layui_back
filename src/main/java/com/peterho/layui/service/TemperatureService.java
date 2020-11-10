@@ -7,6 +7,7 @@ public interface TemperatureService {
     public DataVO<TemperatureVO> findData(Integer page, Integer limit);
     public DataVO<TemperatureVO> getTemperature();
     public String writeData(String data);
-//    public DataVO<TemperatureVO> getNewTemperature();
+
+    //    public DataVO<TemperatureVO> getNewTemperature();
 
 }

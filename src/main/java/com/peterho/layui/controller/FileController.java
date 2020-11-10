@@ -1,6 +1,7 @@
 package com.peterho.layui.controller;
 
 import com.peterho.layui.service.DistrictService;
+import com.peterho.layui.service.EleService;
 import com.peterho.layui.service.TemperatureService;
 import com.peterho.layui.vo.DataVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,11 @@ public class FileController {
     @Autowired
     private TemperatureService temperatureService;
 
+    @Autowired
+    private EleService eleService;
+
+
+
     @RequestMapping("/file")
     public DataVO list(Integer page, Integer limit){
         return temperatureService.findData(page, limit);
@@ -30,6 +36,13 @@ public class FileController {
     public String writeData(String data){
         return temperatureService.writeData(data);
     }
+
+    @RequestMapping("/writeeledata")
+    public String writeEleData(String data){
+        return eleService.writeEleData(data);
+    }
+
+
 
 //    @RequestMapping("/getnewtemperature")
 //    public DataVO getNewTemperature(){
