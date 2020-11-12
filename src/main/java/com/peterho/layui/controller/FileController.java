@@ -42,6 +42,12 @@ public class FileController {
         return eleService.writeEleData(data);
     }
 
+    @RequestMapping("/geteledata")
+    public DataVO getEleData(){
+        return eleService.getEleData();
+    }
+
+
 
 
 //    @RequestMapping("/getnewtemperature")

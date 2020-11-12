@@ -25,9 +25,11 @@ public class EleServiceImpl implements EleService {
 
     // CentOS上的电表数据日志绝对路径
     private final String absEleFilePath = "//project/log/eleData.txt";
+    // 本地测试路径
+//    private final String absEleFilePath = "//Users/macbook/MyProject/Test/eleData.txt";
 
     @Override
-    public DataVO getEleData(){
+    public DataVO<EleDataVO> getEleData(){
         DataVO dataVO = new DataVO();
         dataVO.setCode(0);
         dataVO.setMessage("200");
@@ -42,13 +44,17 @@ public class EleServiceImpl implements EleService {
         for(String temp : lastNLineString){
             EleDataVO eleDataVO = new EleDataVO();
             JSONObject jo = new JSONObject();
+            System.out.println("temp:" + temp);
             jo = JSONObject.fromObject(temp);
+
+            System.out.println("json:"+jo);
+
             eleDataVO.setDate(jo.get("date").toString());
             eleDataVO.setMsgId((Integer) jo.get("msgid"));
             eleDataVO.setSensorId((Integer) jo.get("sensorid"));
-            eleDataVO.setElectricity(jo.get("voltage").toString());
+            eleDataVO.setVoltage(jo.get("voltage").toString());
             eleDataVO.setElectricity(jo.get("electricity").toString());
-            eleDataVO.setElectricity(jo.get("power").toString());
+            eleDataVO.setPower(jo.get("power").toString());
             eleDataVOList.add(eleDataVO);
         }
         dataVO.setData(eleDataVOList);
