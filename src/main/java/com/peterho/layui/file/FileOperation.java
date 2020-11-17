@@ -111,6 +111,8 @@ public class FileOperation {
         }
     }
 
+
+    // 使用的是这个
     public static List<String> readLastNLine(File file, long numRead) {
         // 定义结果集
         List<String> result = new ArrayList<>();

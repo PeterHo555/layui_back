@@ -17,5 +17,12 @@ public class AlgorithmController {
         return algorithmService.getDecompose();
     }
 
+    @RequestMapping("/edgedetection")
+    public DataVO edgeDetection(float averagePowerOld){
+        return algorithmService.edgeDetection(averagePowerOld);
+    }
+
+
+
 
 }
