@@ -5,6 +5,6 @@ import com.peterho.layui.vo.DecomposeVO;
 
 public interface AlgorithmService {
     public DataVO<DecomposeVO> getDecompose();
-    public DataVO<DecomposeVO> edgeDetection(float averagePowerOld);
+    public DecomposeVO edgeDetection(float averagePowerOld);
 
 }

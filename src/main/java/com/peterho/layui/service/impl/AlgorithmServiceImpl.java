@@ -59,17 +59,20 @@ public class AlgorithmServiceImpl implements AlgorithmService {
     }
 
     @Override
-    public DataVO<DecomposeVO> edgeDetection(float averagePowerOld){
+    public DecomposeVO edgeDetection(float averagePowerOld){
+        System.out.println("last");
         float addRate = 0;
         float averagePowerNew = 0;
         int deviceId = 0;
+        boolean state = true;
 
         // 取最后10条数据计算出平均功率
         FileOperation fileOperation = new FileOperation();
         // 读取绝对路径中的日志数据
         File file = new File(absEleFilePath);
-        // 读取最后10行数据
-        List<String> lastNLineString = fileOperation.readLastNLine(file, 10);
+        int lastN = 5;
+        // 读取最后5行数据
+        List<String> lastNLineString = fileOperation.readLastNLine(file, lastN);
         float sum = 0;
         for(String temp : lastNLineString){
             JSONObject jo = new JSONObject();
@@ -78,21 +81,45 @@ public class AlgorithmServiceImpl implements AlgorithmService {
             float power = Float.valueOf(jo.get("power").toString());
             sum += power;
         }
-        averagePowerNew = sum / 10;
+        averagePowerNew = sum / lastN;
+        System.out.println("average:"+ averagePowerNew);
 
         addRate = averagePowerNew - averagePowerOld;
+        System.out.println("addRate:"+ addRate);
+
+        DecomposeVO decomposeVO = new DecomposeVO();
         // 根据平均增长率，判断新插入设备
-        if (addRate <= 10){
-            deviceId = 0; // 表示无新增设备
-        }else if(10 < addRate && addRate <= 30){
+        // 0 表示无新增设备
+        // 1 手机充电器
+        // 2 电风扇
+        // 3 大功率热水器
+        if (addRate >= -10 && addRate <= 10){
+            deviceId = 0;
+            state = true;
+        } else if(10 < addRate && addRate <= 35){
             deviceId = 1;
+            state = true;
+        } else if(35< addRate && addRate <= 60){
+            deviceId = 2;
+            state = true;
+        } else if(addRate > 60) {
+            deviceId = 3;
+            state = true;
+        } else if (addRate >= -35 && addRate < -10 ){
+            deviceId = 1;
+            state = false;
+        } else if (addRate >= -60 && addRate < -35 ){
+            deviceId = 2;
+            state = false;
+        } else if (addRate < -60){
+            deviceId = 3;
+            state = false;
         }
-
-
-
-        DataVO<DecomposeVO> dataVO = new DataVO<>();
-
-        return dataVO;
+        decomposeVO.setDeviceId(deviceId);
+        decomposeVO.setPower(String.valueOf(averagePowerNew));
+        decomposeVO.setState(state);
+        decomposeVO.setAddRate(addRate);
+        return decomposeVO;
     }
 
 

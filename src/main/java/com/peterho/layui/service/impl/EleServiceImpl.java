@@ -76,7 +76,6 @@ public class EleServiceImpl implements EleService {
             bufferWritter.write(data);
             bufferWritter.newLine();
             bufferWritter.close();
-            System.out.println("write data absolute file path Done!");
             return "200";
         }catch(IOException e){
             e.printStackTrace();

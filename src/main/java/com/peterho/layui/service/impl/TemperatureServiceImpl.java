@@ -201,7 +201,6 @@ public class TemperatureServiceImpl implements TemperatureService {
             bufferWritter1.write(data);
             bufferWritter1.newLine();
             bufferWritter1.close();
-            System.out.println("write data absolute file path Done!");
             return "200";
         }catch(IOException e){
             e.printStackTrace();
