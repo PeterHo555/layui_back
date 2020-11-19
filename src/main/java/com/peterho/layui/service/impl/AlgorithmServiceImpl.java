@@ -70,7 +70,7 @@ public class AlgorithmServiceImpl implements AlgorithmService {
         FileOperation fileOperation = new FileOperation();
         // 读取绝对路径中的日志数据
         File file = new File(absEleFilePath);
-        int lastN = 5;
+        int lastN = 1;
         // 读取最后5行数据
         List<String> lastNLineString = fileOperation.readLastNLine(file, lastN);
         float sum = 0;
@@ -92,18 +92,22 @@ public class AlgorithmServiceImpl implements AlgorithmService {
         // 0 表示无新增设备
         // 1 手机充电器
         // 2 电风扇
-        // 3 大功率热水器
+        // 3 灯泡
+        // 4 大功率电热水器
         if (addRate >= -10 && addRate <= 10){
             deviceId = 0;
-            state = true;
+            state = false;
         } else if(10 < addRate && addRate <= 35){
             deviceId = 1;
             state = true;
         } else if(35< addRate && addRate <= 60){
             deviceId = 2;
             state = true;
-        } else if(addRate > 60) {
+        } else if(60 < addRate && addRate <= 100) {
             deviceId = 3;
+            state = true;
+        } else if (100 < addRate ){
+            deviceId = 4;
             state = true;
         } else if (addRate >= -35 && addRate < -10 ){
             deviceId = 1;
@@ -111,8 +115,11 @@ public class AlgorithmServiceImpl implements AlgorithmService {
         } else if (addRate >= -60 && addRate < -35 ){
             deviceId = 2;
             state = false;
-        } else if (addRate < -60){
+        } else if (addRate >= -100 && addRate < -60){
             deviceId = 3;
+            state = false;
+        } else if (addRate < -100){
+            deviceId = 4;
             state = false;
         }
         decomposeVO.setDeviceId(deviceId);
